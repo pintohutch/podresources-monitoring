@@ -14,7 +14,7 @@ spec:
       containers:
       - args:
         - --podresources-socket=/host-podresources/kubelet.sock
-        image: prm/client:latest
+        image: ghcr.io/pintohutch/podresources-monitoring
         name: client
         volumeMounts:
         - mountPath: /host-podresources

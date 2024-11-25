@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: podresources-monitoring
+spec:
+  selector:
+    matchLabels:
+      name: podresources-monitoring
+  template:
+    metadata:
+      labels:
+        name: podresources-monitoring
+    spec:
+      containers:
+      - args:
+        - --podresources-socket=/host-podresources/kubelet.sock
+        image: prm/client:latest
+        name: client
+        volumeMounts:
+        - mountPath: /host-podresources
+          name: host-podresources
+      volumes:
+      - hostPath:
+          path: /var/lib/kubelet/pod-resources
+          type: Directory
+        name: host-podresources

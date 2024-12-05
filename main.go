@@ -92,8 +92,8 @@ func main() {
 			// Continue with the loop
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
-			log.Printf("fetching pod resources response")
 			log.Printf("------")
+			log.Printf("fetching pod resources response")
 			resp, err := client.List(ctx, &podresources.ListPodResourcesRequest{})
 			if err != nil {
 				log.Printf("error listing pod resources: %s", err)

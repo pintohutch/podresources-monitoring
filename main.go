@@ -30,7 +30,7 @@ func prettyPrint(resp *podresources.ListPodResourcesResponse) {
 			if len(c.Devices) == 0 && len(c.Memory) == 0 && len(c.DynamicResources) == 0 {
 				continue
 			}
-			log.Printf("--------")
+			log.Printf("---")
 			log.Printf("pod: %s, namespace: %s, container: %s", p.Name, p.Namespace, c.Name)
 			log.Printf("num of container devices: %d", len(c.Devices))
 			for _, d := range c.Devices {
@@ -93,6 +93,7 @@ func main() {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
 			log.Printf("fetching pod resources response")
+			log.Printf("------")
 			resp, err := client.List(ctx, &podresources.ListPodResourcesRequest{})
 			if err != nil {
 				log.Printf("error listing pod resources: %s", err)

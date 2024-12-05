@@ -21,6 +21,10 @@ const (
 )
 
 func prettyPrint(resp *podresources.ListPodResourcesResponse) {
+	if len(resp.PodResources) == 0 {
+		log.Printf("empty pod resources")
+		return
+	}
 	for _, p := range resp.PodResources {
 		for _, c := range p.Containers {
 			if len(c.Devices) == 0 && len(c.Memory) == 0 && len(c.DynamicResources) == 0 {
@@ -88,6 +92,7 @@ func main() {
 			// Continue with the loop
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()
+			log.Printf("fetching pod resources response")
 			resp, err := client.List(ctx, &podresources.ListPodResourcesRequest{})
 			if err != nil {
 				log.Printf("error listing pod resources: %s", err)

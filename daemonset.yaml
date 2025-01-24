@@ -19,6 +19,11 @@ spec:
         volumeMounts:
         - mountPath: /host-podresources
           name: host-podresources
+      tolerations:
+      - effect: NoExecute
+        operator: Exists
+      - effect: NoSchedule
+        operator: Exists
       volumes:
       - hostPath:
           path: /var/lib/kubelet/pod-resources
